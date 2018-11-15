@@ -41,21 +41,21 @@ namespace AuthenticationMVC.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Xin nhập địa chỉ thư điện tử")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Bạn chưa nhập email")]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="Địa chỉ thư điện tử không hợp lệ")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Bạn chưa nhập mật khẩu")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Ghi nhớ đăng nhập?")]
@@ -64,12 +64,12 @@ namespace AuthenticationMVC.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="Xin nhập địa chỉ thư điện tử")]
+        [EmailAddress(ErrorMessage ="Địa chỉ thư điện tử không hợp lệ")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Xin nhập mật khẩu")]
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} ký tự.", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật Khẩu")]
@@ -83,8 +83,8 @@ namespace AuthenticationMVC.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="Xin nhập địa chỉ thư điện tử")]
+        [EmailAddress(ErrorMessage ="Địa chỉ thư điện tử không hợp lệ")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -104,9 +104,9 @@ namespace AuthenticationMVC.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage ="Xin nhập địa chỉ thư điện tử để xác nhận")]
+        [EmailAddress(ErrorMessage ="Địa chỉ thư điện tử không hợp lệ")]
+        [Display(Name = "Địa chỉ thư điện tử")]
         public string Email { get; set; }
     }
 }

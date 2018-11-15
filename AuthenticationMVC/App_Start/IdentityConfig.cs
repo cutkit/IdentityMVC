@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using AuthenticationMVC.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace AuthenticationMVC
 {
@@ -19,6 +21,23 @@ namespace AuthenticationMVC
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            var client = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential(@"tungroot@gmail.com", "leduytung"),
+                EnableSsl = true
+            };
+            var from = new MailAddress("tungroot@gmail.com", "Xác nhận tài khoản");
+            var to = new MailAddress(message.Destination);
+            var mail = new MailMessage(from, to) {
+                Subject = message.Subject,
+                Body = message.Body,
+                IsBodyHtml = true
+            };
+            client.Send(mail);
             return Task.FromResult(0);
         }
     }
