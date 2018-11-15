@@ -34,8 +34,8 @@ namespace AuthenticationMVC.Models
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận lại mật khẩu")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -53,8 +53,8 @@ namespace AuthenticationMVC.Models
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận lại mật khẩu")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -62,19 +62,19 @@ namespace AuthenticationMVC.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Số điện thoại")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Mã")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
     }
 
