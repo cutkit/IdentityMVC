@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AuthenticationMVC.Areas.Administrator.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class ManageRoleController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -22,10 +23,12 @@ namespace AuthenticationMVC.Areas.Administrator.Controllers
             //}
             return View(model);
         }
+
         public ActionResult Create()
         {
             return View();
         }
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(IdentityRole role)
         {
@@ -45,6 +48,31 @@ namespace AuthenticationMVC.Areas.Administrator.Controllers
                 return View(role);
             }
 
+        }
+        public ActionResult Delete(string id)
+        {
+            var model = db.Roles.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            IdentityRole model = null;
+            try
+            {
+                model = db.Roles.Find(id);
+                db.Roles.Remove(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
         }
     }
 }
